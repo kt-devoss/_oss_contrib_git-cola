@@ -302,22 +302,22 @@ def find_bash_exe():
     and searches typical subdirectories for bash.exe.
     """
     # Find git.exe in PATH
-    git_path = shutil.which("git.exe") or shutil.which("git")
+    git_path = shutil.which('git.exe') or shutil.which('git')
     if not git_path:
         return None
 
     # Estimate Git root directory (e.g., C:\Program Files\Git)
-    cmd_dir  = os.path.dirname(os.path.abspath(git_path))
+    cmd_dir = os.path.dirname(os.path.abspath(git_path))
     git_root = os.path.dirname(cmd_dir)
 
     # Typical relative locations for bash.exe under Git for Windows
-    candidates = ["bin", "mingw64/bin", "usr/bin"]
+    candidates = ['bin', 'mingw64/bin', 'usr/bin']
 
     # Search and return the first match
     for rel in candidates:
-        bash = os.path.join(git_root, rel, "bash.exe")
+        bash = os.path.join(git_root, rel, 'bash.exe')
         if os.path.exists(bash):
-            return bash.replace("\\", "/")
+            return bash.replace('\\', '/')
 
     return None
 

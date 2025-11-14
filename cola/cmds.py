@@ -1917,8 +1917,8 @@ class PrepareCommitMessageHook(ContextCommand):
 
                 Interaction.log('bash found: "%s"' % bash)
                 # Normalize path separators
-                hook_rep = hook.replace("\\", "/")
-                filename_rep = filename.replace("\\", "/")
+                hook_rep = hook.replace('\\', '/')
+                filename_rep = filename.replace('\\', '/')
 
                 # Run the hook through bash.exe
                 cmd = [bash, hook_rep, filename_rep]
