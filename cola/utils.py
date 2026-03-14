@@ -32,6 +32,11 @@ def clamp(value, low, high):
     return min(high, max(low, value))
 
 
+def clamp_one(value):
+    """Clamp a value into the inclusive 0.0..1.0 range."""
+    return clamp(value, 0.0, 1.0)
+
+
 def clamp_zero(value, maximum):
     """Clamp a value between 0 and the maximum value"""
     return clamp(value, 0, maximum)
