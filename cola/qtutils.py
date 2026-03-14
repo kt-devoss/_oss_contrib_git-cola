@@ -1264,6 +1264,22 @@ def rgb_triple(args):
     return rgb(*args)
 
 
+ColorLike = QtGui.QColor | str | tuple[int, int, int] | tuple[int, int, int, int]
+
+
+def rgba_qcolor(value: ColorLike) -> QtGui.QColor:
+    """Normalize ColorLike input to QColor."""
+    if isinstance(value, QtGui.QColor):
+        return QtGui.QColor(value)
+    if isinstance(value, str):
+        return QtGui.QColor(value)
+    if len(value) == 3:
+        red, green, blue = value
+        return QtGui.QColor(int(red), int(green), int(blue))
+    red, green, blue, alpha = value
+    return QtGui.QColor(int(red), int(green), int(blue), int(alpha))
+
+
 def rgb_css(color):
     """Convert a QColor into an rgb #abcdef CSS string"""
     return '#%s' % rgb_hex(color)
