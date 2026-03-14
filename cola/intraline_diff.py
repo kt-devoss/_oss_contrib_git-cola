@@ -476,17 +476,16 @@ def _compute_intraline_spans_from_paired_lines(
         cfg=cfg,
     )
     for opcode in opcodes:
-        match opcode.tag:
-            case 'equal':
-                add_span(minus_spans, opcode.minus_span, IntralineKind.EQ)
-                add_span(plus_spans, opcode.plus_span, IntralineKind.EQ)
-            case 'replace':
-                add_span(minus_spans, opcode.minus_span, IntralineKind.REP)
-                add_span(plus_spans, opcode.plus_span, IntralineKind.REP)
-            case 'delete':
-                add_span(minus_spans, opcode.minus_span, IntralineKind.DEL)
-            case 'insert':
-                add_span(plus_spans, opcode.plus_span, IntralineKind.ADD)
+        if opcode.tag == 'equal':
+            add_span(minus_spans, opcode.minus_span, IntralineKind.EQ)
+            add_span(plus_spans, opcode.plus_span, IntralineKind.EQ)
+        elif opcode.tag == 'replace':
+            add_span(minus_spans, opcode.minus_span, IntralineKind.REP)
+            add_span(plus_spans, opcode.plus_span, IntralineKind.REP)
+        elif opcode.tag == 'delete':
+            add_span(minus_spans, opcode.minus_span, IntralineKind.DEL)
+        elif opcode.tag == 'insert':
+            add_span(plus_spans, opcode.plus_span, IntralineKind.ADD)
 
     return minus_spans, plus_spans
 
